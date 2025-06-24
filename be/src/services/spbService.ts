@@ -1,5 +1,5 @@
 import { db } from '../db';
-import { SPB } from '../models/spb.model';
+import { cancelSPB, SPB } from '../models/spbModel';
 
 export const getSPBList = async (
   kodeRak: string,
@@ -34,3 +34,12 @@ export const getSPBList = async (
   const result = await db.query(querySPB, params);
   return result.rows;
 };
+
+
+export async function deleteSPBRecord (recordId: string) {
+  if (!recordId) {
+    throw new Error('recordId is required')
+  }
+
+  await cancelSPB(recordId)
+}
