@@ -20,6 +20,9 @@ importers:
       get-stream:
         specifier: ^6.0.1
         version: 6.0.1
+      oracledb:
+        specifier: 5.5.0
+        version: 5.5.0
       pdfkit:
         specifier: ^0.17.1
         version: 0.17.1
@@ -42,6 +45,9 @@ importers:
       '@types/node':
         specifier: ^24.0.0
         version: 24.0.0
+      '@types/oracledb':
+        specifier: ^6.6.1
+        version: 6.6.1
       '@types/pdfmake':
         specifier: ^0.2.11
         version: 0.2.11
@@ -207,6 +213,9 @@ packages:
 
   '@types/node@24.0.0':
     resolution: {integrity: sha512-yZQa2zm87aRVcqDyH5+4Hv9KYgSdgwX1rFnGvpbzMaC7YAljmhBET93TPiTd3ObwTL+gSpIzPKg5BqVxdCvxKg==}
+
+  '@types/oracledb@6.6.1':
+    resolution: {integrity: sha512-zNl0yZkUVFNxCdrL7S3T0VUJHYj1Hg6bgrW/JiJ1ufjowVym8aapkAw+MvZNKe1LhpEl+RmMbPDRg/VGs7QiLQ==}
 
   '@types/pdfkit@0.14.0':
     resolution: {integrity: sha512-X94hoZVr9dNfV23roeXRm57AWS+AOMak3gq2wZvn4TXiLvXE8+TrYaM5IkMyZbGRw49jEqI49rP/UVL3+C3Svg==}
@@ -775,6 +784,10 @@ packages:
     resolution: {integrity: sha512-6IpQ7mKUxRcZNLIObR0hz7lxsapSSIYNZJwXPGeF0mTVqGKFIXj1DQcMoT22S3ROcLyY/rz0PWaWZ9ayWmad9g==}
     engines: {node: '>= 0.8.0'}
 
+  oracledb@5.5.0:
+    resolution: {integrity: sha512-i5cPvMENpZP8nnqptB6l0pjiOyySj1IISkbM4Hr3yZEDdANo2eezarwZb9NQ8fTh5pRjmgpZdSyIbnn9N3AENw==}
+    engines: {node: '>=10.16'}
+
   p-limit@3.1.0:
     resolution: {integrity: sha512-TYOanM3wGwNGsZN2cVTYPArw454xnXj5qmWF1bEoAc4+cU/ol7GVh7odevjp1FNHduHc3KZMcFduxU5Xc6uJRQ==}
     engines: {node: '>=10'}
@@ -1267,6 +1280,10 @@ snapshots:
   '@types/node@24.0.0':
     dependencies:
       undici-types: 7.8.0
+
+  '@types/oracledb@6.6.1':
+    dependencies:
+      '@types/node': 24.0.0
 
   '@types/pdfkit@0.14.0':
     dependencies:
@@ -1883,6 +1900,8 @@ snapshots:
       prelude-ls: 1.2.1
       type-check: 0.4.0
       word-wrap: 1.2.5
+
+  oracledb@5.5.0: {}
 
   p-limit@3.1.0:
     dependencies:

@@ -31,40 +31,6 @@ export interface SPB {
   spb_minuspcs: number;
 }
 
-export type SPBFilterParams = {
-  tanggalAwal: string;
-  tanggalAkhir: string;
-  lokasi: string;
-  jenis: string;
-  status: string;
-  order: string;
-  asc: string;
-};
-
-export type SPBRecord = {
-  spb_lokasiasal: string;
-  spb_lokasitujuan: string;
-  spb_prdcd: string;
-  spb_deskripsi: string;
-  spb_jenis: string;
-  spb_minus: number;
-  prd_frac: number;
-  spb_recordid: string | null;
-};
-
-export type SPBReportRow = {
-  spb_lokasiasal: string;
-  spb_lokasitujuan: string;
-  spb_prdcd: string;
-  spb_deskripsi: string;
-  spb_jenis: 'Auto' | 'Manual' | 'TAC'; // transformed
-  spb_ctn: number;
-  spb_pcs: number;
-  spb_recordid: 'Belum Diturunkan' | 'Belum Direalisasi' | 'Batal' | string;
-};
-
-
-
 export async function cancelSPB(spbId: string) {
   const queries = [
     `UPDATE TBTEMP_ANTRIANSPB SET spb_recordid = '2' WHERE spb_id = $1`,

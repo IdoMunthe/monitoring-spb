@@ -1,6 +1,6 @@
 import PDFDocument from 'pdfkit';
-import PDFTable from 'pdfkit-table';
-import { start } from 'repl';
+import { fetchCabangName } from '../services/authService';
+import { SLPRecord } from '../models/slpModel';
 
 interface SPBReportItem {
   spb_recordid: string;
@@ -23,6 +23,7 @@ export const generateSPBReportPDF = async (
     endDate: string;
   },
 ): Promise<Buffer> => {
+  const cabang = await fetchCabangName();
   const { jenis, status, order, startDate, endDate } = meta;
 
   const doc = new PDFDocument({ margin: 30, size: 'A4' });
@@ -33,7 +34,7 @@ export const generateSPBReportPDF = async (
     .fontSize(10)
     .text('PT. INTI CAKRAWALA CITRA', { continued: true })
     .text(`Jenis SPB : ${jenis}`, { align: 'right' })
-    .text('INDOGROSIR CIKOKOL', { continued: true })
+    .text(`${cabang}`, { continued: true })
     .text(`Status : ${status}`, { align: 'right' });
 
   doc
@@ -45,9 +46,7 @@ export const generateSPBReportPDF = async (
     .fontSize(14)
     .text('SLIP PENURUNAN BARANG', { align: 'center', underline: true });
 
-  doc
-    .fontSize(10)
-    .text(`Tgl Cetak : ${tglCetak}`, { align: 'center' })
+  doc.fontSize(10).text(`Tgl Cetak : ${tglCetak}`, { align: 'center' });
 
   doc.moveDown(); // add spacing before the table
 
@@ -101,5 +100,79 @@ export const generateSPBReportPDF = async (
 
     doc.table(table);
     doc.end();
+  });
+};
+
+export const generateSLPReportPDF = async (
+  data: SLPRecord[],
+  meta: {
+    status: string;
+    order: string;
+    asc: string;
+    tanggal: string;
+  },
+): Promise<Buffer> => {
+  const { status, order, asc, tanggal } = meta;
+  const cabang = await fetchCabangName();
+  const doc = new PDFDocument({ margin: 30, size: 'A4' });
+  const tglCetak = new Date().toLocaleDateString('id-ID');
+
+  doc
+    .fontSize(10)
+    .text('PT. INTI CAKRAWALA CITRA', { continued: true })
+    .text(`Tgl SLP : ${tanggal}`, { align: 'right' })
+    .text(`${cabang}`, { continued: true })
+    .text(`Status : ${status}`, { align: 'right' })
+    .text(`Order By : ${order}`, { align: 'right' });
+
+  doc
+    .moveDown()
+    .fontSize(14)
+    .text('SLIP LOKASI PENYIMPANAN', { align: 'center', underline: true })
+    .fontSize(10)
+    .text(`Tgl Cetak : ${tglCetak}`, { align: 'center' });
+
+  doc.moveDown();
+
+  const table = {
+    columnStyles: [30, 90, '*', 40, 40, 60, 50, 50],
+    data: [
+      [
+        'No',
+        'Lokasi',
+        'PLU - Desc',
+        'CTN',
+        'PCS',
+        'Exp Date',
+        'SLP ID',
+        'Status',
+      ],
+      ...data.map((item, index) => [
+        index + 1,
+        item.lokasi,
+        item.plu,
+        item.qtyctn,
+        item.qtypcs,
+        item.exp_date,
+        item.slp_id,
+        item.slp_flag === 'P'
+          ? 'Sudah'
+          : item.slp_flag === 'B'
+            ? 'Belum'
+            : item.slp_flag === 'C'
+              ? 'Batal'
+              : 'Belum',
+      ]),
+    ],
+  };
+
+  const chunks: any[] = [];
+  doc.on('data', (chunk) => chunks.push(chunk));
+  doc.table(table);
+  doc.end();
+
+  return new Promise((resolve, reject) => {
+    doc.on('error', reject);
+    doc.on('end', () => resolve(Buffer.concat(chunks)));
   });
 };

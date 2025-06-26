@@ -21,16 +21,18 @@ export default function Home() {
         </div>
 
         <div className="flex justify-center items-center flex-col gap-y-4">
-          <Button url="/form-utama" className="bg-[#CD853F]">
+          <Button url="/spb" className="bg-[#CD853F]">
             SPB
           </Button>
-          <Button url="/form-monitoring-slp" className="bg-[#87CEFA]">
+          <Button url="/slp" className="bg-[#87CEFA]">
             SLP
           </Button>
-          <Button url="/form-optimalisasi" className="bg-pink-300">
+          <Button url="/optimalisasi" className="bg-pink-300">
             Optimalisasi
           </Button>
-          <Button url="/" className="bg-lime-300">Exit</Button>
+          {/* <Button url="/" className="bg-lime-300">
+            Exit
+          </Button> */}
         </div>
 
         <div className="bg-[#F5DEB3] box cursor-default">Version 1.2</div>

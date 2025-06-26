@@ -3,9 +3,22 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "../../app/globals.css";
-import { RawSPB } from "./RawSPB";
 import { SPBReportPDF } from "@/components/SPBReportPDF";
 import { PDFViewer } from "@react-pdf/renderer";
+
+export type RawSPB = {
+  spb_id: string;
+  spb_lokasiasal: string;
+  spb_lokasitujuan: string;
+  spb_prdcd: string;
+  spb_deskripsi: string;
+  spb_qty: number;
+  spb_minusctn: number;
+  spb_minuspcs: number;
+  spb_recordid: string;
+  spb_jenis: string;
+  spb_kodespi: string;
+};
 
 type RackData = {
   spb_id: string;
@@ -206,11 +219,6 @@ export default function FormUtama() {
       : String(bVal).localeCompare(String(aVal));
   });
 
-  const handleRefresh = () => {
-    setRackCode((prev) => prev);
-  };
-
-  // TODO: implement report
   const handleReport = () => {
     setShowReportModal(true);
   };

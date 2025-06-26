@@ -1,4 +1,4 @@
-import { getUserByCredentials } from '../models/authModel';
+import { getCabangName, getUserByCredentials } from '../models/authModel';
 
 export async function authenticateUser(
   username: string,
@@ -10,4 +10,9 @@ export async function authenticateUser(
 
   if (user.userlevel > minUserLevel) return { status: 'insufficient', user };
   return { status: 'valid', user };
+}
+
+export async function fetchCabangName() {
+  const cabang = await getCabangName();
+  return cabang;
 }

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { authenticateUser } from '../services/authService';
+import { authenticateUser, fetchCabangName } from '../services/authService';
 
 export const handleApprovalLogin = async (req: Request, res: Response) => {
   const { username, password } = req.body;
