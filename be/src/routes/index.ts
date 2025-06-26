@@ -18,7 +18,7 @@ router.get('/report/spb', handlePrintSPBReport);
 
 router.get('/slp', fetchSLPData);
 router.get('/report/slp', handlePrintSLPReport);
-// TODO: Oracle db can't connect due to its version. Version 11.x. Library oracledb only supports version 12 or more
+// TODO: Run http://localhost:3001/api/otp on postman and look at the error.
 // @ts-ignore
 router.post('/otp', createOtp);
 

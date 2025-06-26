@@ -4,7 +4,7 @@ export const queryOracle = async (sql: string, params: any = {}) => {
   const connection = await oracledb.getConnection({
     user: 'igrmktho',
     password: 'igrmktho',
-    connectString: '172.20.28.24:1512/igrmktho', 
+    connectString: '172.20.28.24:1521/igrmktho', 
   });
 
   try {
