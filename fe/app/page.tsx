@@ -35,7 +35,7 @@ export default function Home() {
           </Button> */}
         </div>
 
-        <div className="bg-[#F5DEB3] box cursor-default">Version 1.2</div>
+        <div className="bg-[#F5DEB3] box cursor-default">Version 1.x</div>
       </div>
     </div>
   );
