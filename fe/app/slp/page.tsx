@@ -164,7 +164,6 @@ export default function formMonitoringSLP() {
         }
       );
       console.log(authRes);
-      const { status, userLevel } = authRes.data;
       setShowInputOTPModal(true);
     } catch (error: any) {
       console.error(error);
@@ -187,14 +186,23 @@ export default function formMonitoringSLP() {
         return;
       }
 
-      // await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/otp`);
-    } catch (error) {}
-    setShowInputOTPModal(false);
-    setShowOTPSuccessfullyCreated(true);
-    setShowApprovalModal(false);
-    setTimeout(() => {
-      setShowOTPSuccessfullyCreated(false);
-    }, 1500);
+      await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/otp`, {
+        code: OTP,
+        username: username,
+      });
+      setShowOTPSuccessfullyCreated(true);
+      setShowApprovalModal(false);
+      setTimeout(() => {
+        setShowOTPSuccessfullyCreated(false);
+      }, 1500);
+      setOTP("");
+      setUsername("")
+      setPassword("")
+    } catch (error) {
+      console.log("error:", error);
+    } finally {
+      setShowInputOTPModal(false);
+    }
   };
 
   return (
@@ -414,8 +422,8 @@ export default function formMonitoringSLP() {
               <button
                 onClick={() => {
                   setShowApprovalModal(false);
-                  setUsername("");
-                  setPassword("");
+                  setUsername("")
+                  setPassword("")
                 }}
                 className="px-3 py-1 bg-gray-300 rounded cursor-pointer hover:bg-gray-400"
               >

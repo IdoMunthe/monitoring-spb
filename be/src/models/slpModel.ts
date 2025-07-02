@@ -41,15 +41,9 @@ export async function getKodeToko(): Promise<number> {
   return res.rows[0].prs_kodeigr;
 }
 
+export async function insertOTP(hashedOtp: string, createdBy: string) {
+  const kodeToko = await getKodeToko();
 
-export async function insertOTP(
-  hashedOtp: string,
-  createdBy: string,
-) {
-
-
-  const kodeToko = await getKodeToko()
-  
   const query = `
   INSERT INTO TBTEMP_OTP (
       OTP_RECORDID, OTP_KODETOKO, OTP_CODE1, OTP_VALID,

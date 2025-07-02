@@ -16,6 +16,7 @@ export async function generateOtp(req: Request, res: Response) {
 
     const result = await createOtp(code, username)
     res.status(201).json({message: result.message, data: result.data})
+
     
   } catch (error) {
     console.error('OTP generation failed', error)

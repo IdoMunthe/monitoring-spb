@@ -16,8 +16,6 @@ export async function createOtp(rawCode: string, user: string) {
   const bln = (now.getMonth() + 1).toString().padStart(2, '0');
   const thn = now.getFullYear().toString();
 
-  console.log(now, tgl, bln, thn)
-
   const combined = md5Hash(
     md5Hash(String(tgl)) +
       md5Hash(String(bln)) +
@@ -25,7 +23,7 @@ export async function createOtp(rawCode: string, user: string) {
       md5Hash(String(rawCode)),
   );
 
-  console.log(combined)
+  console.log(combined);
 
   const kodeToko = await getKodeToko();
 
